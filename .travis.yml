@@ -8,6 +8,7 @@ before_install:
 - tar -xvf openshift.tar.gz
 - cd openshift-origin-server-v1.3.1-dad658de7465ba8a234a4fb40b5b446a45a4cee1-linux-64bit
 - ls -lar
+- sudo chmod +x oc
 - sudo oc cluster up
 
 script:
