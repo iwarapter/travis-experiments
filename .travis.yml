@@ -11,4 +11,4 @@ before_install:
 - sudo ./openshift start &> openshift.log &
 
 script:
-- curl -k https://localhost:8443
+- curl -k https://0.0.0.0:8443
