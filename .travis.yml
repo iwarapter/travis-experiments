@@ -4,11 +4,10 @@ services:
   - docker
   
 before_install:
-- sudo docker run -d --name "origin" \
-        --privileged --pid=host --net=host \
-        -v /:/rootfs:ro -v /var/run:/var/run:rw -v /sys:/sys -v /var/lib/docker:/var/lib/docker:rw \
-        -v /var/lib/origin/openshift.local.volumes:/var/lib/origin/openshift.local.volumes \
-        openshift/origin start
+- wget https://github.com/openshift/origin/releases/download/v1.3.1/openshift-origin-server-v1.3.1-dad658de7465ba8a234a4fb40b5b446a45a4cee1-linux-64bit.tar.gz -O openshift.tar.gz
+- tar zxvf openshift.tar.gz
+- cd openshit
+- sudo ./openshift start
 
 script:
 - bundle exec rake test
