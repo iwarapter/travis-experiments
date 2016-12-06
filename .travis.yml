@@ -11,5 +11,4 @@ before_install:
 - sudo ./openshift start &> openshift.log &
 
 script:
-- bundle exec rake test
-
+- curl -k https://localhost:8443
