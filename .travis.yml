@@ -49,4 +49,6 @@ jobs:
       - echo 'functionalTest'
 
     - stage: deploy
+      env:
+        - SONARQUBE_VERSION=5.6.6 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
       script: echo 'deploy'
