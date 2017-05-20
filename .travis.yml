@@ -14,6 +14,14 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
+env:
+  matrix:
+    - SONARQUBE_VERSION=5.6.6 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
+    - SONARQUBE_VERSION=6.0 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
+    - SONARQUBE_VERSION=6.1 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
+    - SONARQUBE_VERSION=6.2 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
+    - SONARQUBE_VERSION=6.3 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
+
 jobs:
   include:
     - stage: test
@@ -32,14 +40,7 @@ jobs:
       - unzip sonar-scanner-2.5.zip
       - cd -
       - gem install puppet -v 3.8.6
-      env:
-      matrix:
-        - SONARQUBE_VERSION=5.6.6 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
-        - SONARQUBE_VERSION=6.0 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
-        - SONARQUBE_VERSION=6.1 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
-        - SONARQUBE_VERSION=6.2 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
-        - SONARQUBE_VERSION=6.3 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
-        
+      
       script:
       - echo 'build'
       - docker build -t sonar-puppet -f Dockerfile.ci .
