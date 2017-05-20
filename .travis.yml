@@ -22,13 +22,6 @@ env:
     - SONARQUBE_VERSION=6.2 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
     - SONARQUBE_VERSION=6.3 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
     
-
-before_install:
- - echo 'chmod +x gradlew'
-
-after_success:
- - echo './gradlew jacocoTestReport coveralls'
-
 jobs:
   include:
     - stage: test
