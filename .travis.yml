@@ -14,15 +14,16 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-before_install:
- - echo 'chmod +x gradlew'
-
-after_success:
- - echo './gradlew jacocoTestReport coveralls'
-
 jobs:
   include:
     - stage: test
+    
+      before_install:
+       - echo 'chmod +x gradlew'
+
+      after_success:
+       - echo './gradlew jacocoTestReport coveralls'
+    
       install:
       - echo "FROM sonarqube:${SONARQUBE_VERSION}-alpine" > Dockerfile.ci
       - echo "COPY sonar-puppet-plugin/build/libs/* /opt/sonarqube/extensions/plugins/" >> Dockerfile.ci
