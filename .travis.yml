@@ -31,16 +31,15 @@ install:
   - cd -
   - gem install puppet -v 3.8.6
 
+script:
+  - echo 'build'
+  - docker build -t sonar-puppet -f Dockerfile.ci .
+  - docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonar-puppet
+  - echo 'functionalTest'
+
+
 jobs:
   include:
-    - stage: test
-      
-      script:
-      - echo 'build'
-      - docker build -t sonar-puppet -f Dockerfile.ci .
-      - docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonar-puppet
-      - echo 'functionalTest'
-
     - stage: deploy
       env:
         - SONARQUBE_VERSION=5.6.6 PATH=/tmp/sonar-scanner-2.5/bin:$PATH
