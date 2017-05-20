@@ -1,15 +1,17 @@
-sudo: required
+rvm:
+  - 2.2
+  - 2.3
 
-services:
-  - docker
-  
-before_install:
-- wget https://github.com/openshift/origin/releases/download/v1.3.1/openshift-origin-server-v1.3.1-dad658de7465ba8a234a4fb40b5b446a45a4cee1-linux-64bit.tar.gz -O openshift.tar.gz
-- tar -xvf openshift.tar.gz
-- cd openshift-origin-server-v1.3.1-dad658de7465ba8a234a4fb40b5b446a45a4cee1-linux-64bit
-- ls -lar
-- chmod +x oc
-- ./oc cluster up
+env:
+  - FOO=foo
+  - FOO=bar
 
-script:
-- curl -k https://0.0.0.0:8443
+script: echo $FOO
+
+jobs:
+  include:
+    - stage: deploy
+      script: echo Deploy
+      # Keep in mind to overwrite these here
+      rvm: 2.3
+      env: FOO=foo
