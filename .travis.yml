@@ -44,7 +44,7 @@ jobs:
       - echo 'build'
       - docker build -t sonar-puppet -f Dockerfile.ci .
       - docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonar-puppet
-      - echo 'functionalTest
+      - echo 'functionalTest'
 
     - stage: deploy
       script: echo 'deploy'
